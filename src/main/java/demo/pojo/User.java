@@ -1,6 +1,7 @@
 package demo.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created By jiabin on 18-5-8.
@@ -16,6 +17,8 @@ public class User implements Serializable {
     private String nickname;
 
     private String roles;
+
+    private Date birthday;
 
     public Long getId() {
         return id;
@@ -57,14 +60,23 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
-        return "User2{" +
+        return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", roles='" + roles + '\'' +
+                ", birthday='" + birthday + '\'' +
                 '}';
     }
 }
