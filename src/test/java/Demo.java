@@ -70,6 +70,6 @@ public class Demo {
 
     @Test
     public void test3() {
-        logger.info(userDao.selectUserById(5, "123").toString());
+        logger.info(userDao.selectUserById(8, "123").toString());
     }
 }

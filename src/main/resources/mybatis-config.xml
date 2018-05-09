@@ -26,13 +26,23 @@
             <!--事务， mybatis有两种：JDBC 和 MANAGED, 配置为JDBC则直接使用JDBC的事务，配置为MANAGED则是将事务托管给容器-->
             <!--JDBC,POOLED都是定义在Configuration类中的别名-->
             <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <!--定义好链接编码防止中文插入乱码，转义 &amp; 代替&-->
+            <!--自定义Druid数据源-->
+            <dataSource type="demo.datasource.DruidDataSourceFactory">
+                <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123123"/>
+                <property name="initialSize" value="1"/>
+                <property name="maxActive" value="20" />
+                <property name="maxWait" value="60000" />
             </dataSource>
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+                <!--定义好链接编码防止中文插入乱码，转义 &amp; 代替&-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="123123"/>-->
+            <!--</dataSource>-->
         </environment>
 
         <!--<environment id="test">
