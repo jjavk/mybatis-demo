@@ -7,9 +7,20 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="useGeneratedKeys" value="true"/>
     </settings>
+    <typeAliases>
+        <typeAlias type="com.alibaba.druid.pool.DruidDataSource" alias="DRIUD"/>
+    </typeAliases>
 
+    <typeHandlers>
+        <!--jdbcType只能是JdbcType枚举中定义的-->
+        <typeHandler handler="" javaType="" jdbcType="VARCHAR"/>
+    </typeHandlers>
+
+    <!--定义多个环境，比如开发环境，测试环境等，设置默认环境-->
     <environments default="development">
         <environment id="development">
+            <!--事务， mybatis有两种：JDBC 和 MANAGED, 配置为JDBC则直接使用JDBC的事务，配置为MANAGED则是将事务托管给容器-->
+            <!--JDBC,POOLED都是定义在Configuration类中的别名-->
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
@@ -18,10 +29,24 @@
                 <property name="password" value="123123"/>
             </dataSource>
         </environment>
+
+        <!--<environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED"/>
+        </environment>-->
     </environments>
 
     <mappers>
         <mapper resource="mapper/NodeMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
+
+        <!--
+        class指定接口与对应的xml文件形成映射关系,必须同名(不区分大小写)
+        <mapper class=""/>
+        指定包,自动扫描,与class指定同理
+        <package name=""/>
+        url指定mapper.xml文件位置
+        <mapper url="file://..."/>
+        -->
     </mappers>
 </configuration>
