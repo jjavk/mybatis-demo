@@ -6,6 +6,7 @@
         <setting name="defaultStatementTimeout" value="5"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="useGeneratedKeys" value="true"/>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
     </settings>
     <typeAliases>
         <typeAlias type="com.alibaba.druid.pool.DruidDataSource" alias="DRIUD"/>
@@ -13,7 +14,8 @@
 
     <typeHandlers>
         <!--jdbcType只能是JdbcType枚举中定义的-->
-        <typeHandler handler="" javaType="" jdbcType="VARCHAR"/>
+        <!--javaType和jdbcType在TypeHandler类通过注解MappedTypes和MappedJdbcTypes设置-->
+        <typeHandler handler="demo.handler.type.MyDateTypeHandler"/>
     </typeHandlers>
 
     <!--定义多个环境，比如开发环境，测试环境等，设置默认环境-->
