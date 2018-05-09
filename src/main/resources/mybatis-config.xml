@@ -15,7 +15,9 @@
     <typeHandlers>
         <!--jdbcType只能是JdbcType枚举中定义的-->
         <!--javaType和jdbcType在TypeHandler类通过注解MappedTypes和MappedJdbcTypes设置-->
+        <!--<package name="demo.handler.type"/>-->
         <typeHandler handler="demo.handler.type.MyDateTypeHandler"/>
+        <typeHandler handler="demo.handler.type.MyListTypeHandler"/>
     </typeHandlers>
 
     <!--定义多个环境，比如开发环境，测试环境等，设置默认环境-->
@@ -26,7 +28,8 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?useSSL=false"/>
+                <!--定义好链接编码防止中文插入乱码，转义 &amp; 代替&-->
+                <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123123"/>
             </dataSource>

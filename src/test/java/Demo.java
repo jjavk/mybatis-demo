@@ -63,7 +63,9 @@ public class Demo {
         user.setUsername("123");
         user.setRoles("112");
         user.setBirthday(new Date());
+        user.setInterests(Arrays.asList("red", "blue", "yellow", "足球"));
         userDao.insert(user);
+        logger.info(user.toString());
     }
 
     @Test

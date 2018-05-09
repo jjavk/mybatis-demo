@@ -10,23 +10,27 @@
         <result property="roles" column="roles"/>
         <!--自定义TypeHandler，此处指定只能对select语句中转换有效-->
         <result property="birthday" column="birthday" javaType="java.util.Date" jdbcType="BIGINT" typeHandler="demo.handler.type.MyDateTypeHandler"/>
+        <result property="interests" column="interests" javaType="java.util.List" jdbcType="VARCHAR" typeHandler="demo.handler.type.MyListTypeHandler"/>
     </resultMap>
 
+    <!--级联多列是column="{prop1=col1, prop2=col2}"-->
     <resultMap id="CascadeResultMap" type="demo.pojo.Cascade" extends="BaseResultMap">
         <association property="user" column="{id=id, usernames=username}" javaType="demo.pojo.User" select="selectUserById"/>
     </resultMap>
 
     <!--自定义TypeHandler，insert语句需要重新设置TypeHandler属性,可以只写typeHandler或者javaType和jdbcType或者三个都写-->
-    <insert id="insert" parameterType="demo.pojo.User">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="demo.pojo.User">
         INSERT INTO
-          user(username, password, nickname, roles, birthday)
+          user(username, password, nickname, roles, birthday, interests)
         VALUES
-          (#{username}, #{password}, #{nickname}, #{roles}, #{birthday, javaType=Date, jdbcType=BIGINT, typeHandler=demo.handler.type.MyDateTypeHandler})
+          (#{username}, #{password}, #{nickname}, #{roles},
+          #{birthday, javaType=Date, jdbcType=BIGINT, typeHandler=demo.handler.type.MyDateTypeHandler},
+          #{interests, javaType=List, jdbcType=VARCHAR, typeHandler=demo.handler.type.MyListTypeHandler})
     </insert>
 
     <select id="selectByCasId" resultMap="CascadeResultMap">
         SELECT
-          id, username, password, nickname, roles, birthday
+          id, username, password, nickname, roles, birthday, interests
         FROM
           user
         WHERE
@@ -35,7 +39,7 @@
 
     <select id="selectUserById" resultMap="BaseResultMap">
         SELECT
-          id, username, password, nickname, roles, birthday
+          id, username, password, nickname, roles, birthday, interests
         FROM
           user
         WHERE

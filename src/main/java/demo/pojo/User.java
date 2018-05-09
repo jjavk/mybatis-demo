@@ -1,7 +1,10 @@
 package demo.pojo;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created By jiabin on 18-5-8.
@@ -19,6 +22,8 @@ public class User implements Serializable {
     private String roles;
 
     private Date birthday;
+
+    private List<String> interests;
 
     public Long getId() {
         return id;
@@ -68,6 +73,14 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
+    public List<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -77,6 +90,7 @@ public class User implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", roles='" + roles + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", interests='" + Arrays.toString((interests == null ? Collections.emptyList().toArray() : interests.toArray())) + '\'' +
                 '}';
     }
 }
