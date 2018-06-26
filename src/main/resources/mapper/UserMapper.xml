@@ -28,6 +28,24 @@
           #{interests, javaType=List, jdbcType=VARCHAR, typeHandler=demo.handler.type.MyListTypeHandler})
     </insert>
 
+    <insert id="insertBatch" parameterType="demo.pojo.User">
+        INSERT INTO
+          user(username, password, nickname, roles, birthday, interests)
+        VALUES
+        <foreach collection ="users" item="user" separator =",">
+            (#{user.username}, #{user.password}, #{user.nickname}, #{user.roles},
+            #{user.birthday, javaType=Date, jdbcType=BIGINT, typeHandler=demo.handler.type.MyDateTypeHandler},
+            #{user.interests, javaType=List, jdbcType=VARCHAR, typeHandler=demo.handler.type.MyListTypeHandler})
+        </foreach >
+    </insert>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        SELECT
+          username, password, nickname, roles, birthday, interests
+        FROM
+          user
+    </select>
+
     <select id="selectByCasId" resultMap="CascadeResultMap">
         SELECT
           id, username, password, nickname, roles, birthday, interests

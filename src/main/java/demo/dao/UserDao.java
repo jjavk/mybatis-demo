@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserDao {
     int insert(User record);
 
+    int insertBatch(@Param("users") List<User> users);
+
     List<User> selectAllUser();
 
     void updateAgeById(@Param("id") Integer id, @Param("age") Integer age);
